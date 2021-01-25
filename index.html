@@ -55,7 +55,7 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-12 text-right">
-                                    <button type="submit" class="btn btn-primary">Connexion</button>
+                                    <button type="submit" class="btn btn-primary" onclick="connexion()">Connexion</button>
                                 </div>
                             </div>
                             <div class="row mt-5">
@@ -128,6 +128,18 @@
             function allowSignUp(){
                 $("#connectForm").show();
                 $("#signInForm").hide();
+            }
+
+            function connexion(){
+                $.ajax({
+                url: 'https://api.wit.ai/message?v=20140826&q=',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "Bearer 6QXNMEMFHNY4FJ5ELNFMP5KRW52WFXN5")
+                }, success: function(data){
+                    alert(data);
+                    //process the JSON data etc
+                        }
+                })
             }
 
             $("#cardIndex").load("html_ressources/subject_card.html");
