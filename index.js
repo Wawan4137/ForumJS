@@ -17,8 +17,7 @@ async function connection(){
         $('#welcomeMessage').html('Bienvenue, '+user.username)
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
-        
-
+        $('button[name="addSubject"]').show();
     }
 }
 
@@ -36,6 +35,7 @@ function logout(){
     $('#welcomeMessage').html('')
     $('#welcomeMessage').hide()
     $('button[name="seconnecter"]').show()
+    $('button[name="addSubject"]').hide();
 }
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
@@ -70,6 +70,7 @@ $(document).ready(function(){
 
     $('#signInForm').hide();
     $('button[name="logout"]').hide()
+    $('button[name="addSubject"]').hide()
 
     //On actualise l'utilisateur
     reset()
