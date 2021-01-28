@@ -10,7 +10,7 @@ class Subject{
 
 }
 
-function getAllSubjects(nPage){
+/*function getAllSubjects(nPage){
 
     let url = "http://localhost:8000/api/sujets?page="+nPage;
     let SubjectList = [];
@@ -21,13 +21,14 @@ function getAllSubjects(nPage){
             response['hydra:member'].forEach(sujet => {           
                 SubjectList.push(new Subject(sujet['nom'], sujet['auteur'], sujet['dateCreation'], sujet['categorie'], sujet['id']));
                 i++;
-                if(i == 5) break;
+                if(i == 5) 
+                    break;
             });
         })  
 
     return SubjectList;
 
-}
+}*/
 
 function writeCard(titre, id){
     document.write("<div class=\"row mt-2\">");
