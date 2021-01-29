@@ -47,7 +47,7 @@ export default class User{
                 if(user.username == username){
                     this.id = user.id
                     this.username = user.username
-                    this.roles = user.roles[1]
+                    this.roles = user.roles[0]
                     this.token = token
                     found = true;
                 }
