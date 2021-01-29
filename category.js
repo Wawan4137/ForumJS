@@ -1,8 +1,10 @@
 import User from './objects/User.js'
 import Category from './objects/Categories.js'
+import Subject from './objects/Subject.js'
 
 let user = new User()
 let category = new Category()
+let subject = new Subject();
 
 //Fonction de connexion (Header)
 async function connection(){
@@ -15,8 +17,7 @@ async function connection(){
         $('#welcomeMessage').html('Bienvenue, '+user.username)
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
-        $('button[name="addSubject"]').show();      
-
+        $('button[name="addSubject"]').show();     
     }
 }
 
@@ -53,6 +54,14 @@ async function getCategoryWithId(id){
     category = await category.init(id)
 }
 
+async function createSubject(){
+    
+    let titre = $('input[name="subjectTitle"]')[0].value
+    let contenu = $('input[name="subjectContent"]').val();
+    console.log(titre+"-"+contenu);
+    subject = await subject.create(titre, "INFORMATIQUE", user.username, contenu);
+}
+
 $(document).ready(function(){
     let params = new URLSearchParams(location.search)
     let id_categorie = params.get('id')
@@ -76,6 +85,9 @@ $(document).ready(function(){
     })
     $('button[name="logout"]').click(() => {
         logout()
+    })
+    $('button[name="createSubject"]').click(() =>{
+        createSubject();
     })
 
     //Changement log form

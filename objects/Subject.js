@@ -1,49 +1,29 @@
-class Subject{
+import * as subjectStore from '../store/subjectStore.js'
 
-    constructor(titre, auteur, date_creation, categorie, id){
-        this.titre = titre;
-        this.auteur = auteur;
-        this.date_creation = date_creation;
+export default class Subject{
+    constructor(nom = null, dateCreation = null, categorie = null, auteur = null, messages = null){
+        this.nom = nom;
         this.categorie = categorie;
-        this.id = id;
-    }   
+        this.auteur = auteur;
+        this.messages = messages;
 
-}
+        
 
-/*function getAllSubjects(nPage){
+        this.dateCreation = dateCreation;
+    }
 
-    let url = "http://localhost:8000/api/sujets?page="+nPage;
-    let SubjectList = [];
-    let i = 0;
-    fetch(url)
-        .then(rep => rep.json())
-        .then(response => {
-            response['hydra:member'].forEach(sujet => {           
-                SubjectList.push(new Subject(sujet['nom'], sujet['auteur'], sujet['dateCreation'], sujet['categorie'], sujet['id']));
-                i++;
-                if(i == 5) 
-                    break;
-            });
-        })  
+    create(nom, categorie, auteur, messages){
+        subjectStore.addSubject(nom, this.generateDate(), categorie, auteur, messages);
+        return this;
+    }
 
-    return SubjectList;
+    generateDate(){
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth()+1).padStart(2, '0');
+        let yyyy = today.getFullYear();
 
-}*/
-
-function writeCard(titre, id){
-    document.write("<div class=\"row mt-2\">");
-    document.write("<div class=\"col-md-2\"></div>");
-    document.write("<div class=\"col-md-8\">");
-    document.write("<div class=\"card\">");
-    document.write("<div class=\"card-header\">");
-    document.write("<h4>"+titre+"</h4>");
-    document.write("</div>");
-    document.write("<div class=\"card-body text-right\">");
-    document.write("<a href=\"#\" class=\"btn btn-outline-primary\">En savoir plus...</a>");
-    document.write("</div>");
-    document.write("</div>");
-    document.write("</div>");
-    document.write("<div class=\"col-md-2\"></div>");
-    document.write("</div>");
-    document.write("</div>");
+        today = yyyy + '-' + mm + '-' + dd;
+        return today;
+    }
 }

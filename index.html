@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" href="#">Accueil</a>
-                        <button name="addSubject" type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddSubject"><i class="fas fa-plus"></i> Ajouter un sujet</button>
+                        
                         <p id="welcomeMessage" style="padding: .5em 1em; margin: 0"></p>
                         <button name="logout" type="button" class="btn btn-outline-success">Se déconnecter</button>
                         <button name="seconnecter" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConnexion">
@@ -101,44 +101,7 @@
                     </div>
                     </div>
                 </div>
-            </div>   
-            <!-- Modal add subject -->
-            <div class="modal fade" id="modalAddSubject" tabindex="-1" role="dialog" aria-labelledby="modalAddSubject" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ajouter un sujet</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body container">
-                        <form id="addSubject">
-                            <div class="form-group">
-                                <label for="subjectTitle">Titre</label>
-                                <input type="text" name="subjectTitle" class="form-control" placeholder="Titre de votre sujet" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="subjectCategory">Catégorie</label>
-                                <select name="subjectCategory" class="form-control">
-                                    <option value="test"> 
-                                        test
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="subjectContent">Message</label>
-                                <textarea name="subjectContent" class="form-control" cols="30" rows="10" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-success">Créer</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    </div>
-                    </div>
-                </div>
-            </div>             
+            </div>                         
         </header>
         <main>
         <div class="container mt-5">
