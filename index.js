@@ -18,6 +18,7 @@ async function connection(){
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
         $('button[name="addSubject"]').show();
+        Location.reload();
     }
 }
 
@@ -41,7 +42,6 @@ function logout(){
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
 async function reset(){
     user = await user.resetUserObject();
-    console.log(user);
     if(user.isValid()){
         $('#modalConnexion').modal('hide')
         $('button[name="logout"]').show()
