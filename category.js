@@ -37,13 +37,8 @@ function logout(){
 }
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
-<<<<<<< HEAD
-function reset(){
-    user = user.resetUserObject();
-=======
 async function reset(){
     user = await user.resetUserObject();
->>>>>>> main
     if(user.isValid()){
         $('#modalConnexion').modal('hide')
         $('button[name="logout"]').show()

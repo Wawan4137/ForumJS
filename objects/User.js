@@ -5,11 +5,7 @@ export default class User{
         this.id = null
         this.username = null
         this.token = null
-<<<<<<< HEAD
-        this.id = null
-=======
         this.roles = null
->>>>>>> main
     }
 
     async connect(username,password){
@@ -51,7 +47,7 @@ export default class User{
                 if(user.username == username){
                     this.id = user.id
                     this.username = user.username
-                    this.roles = user.roles[1]
+                    this.roles = user.roles[0]
                     this.token = token
                     found = true;
                 }
