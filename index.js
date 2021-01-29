@@ -47,6 +47,7 @@ function reset(){
         $('#welcomeMessage').html('Bienvenue, '+user.username)
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
+        $('button[name="addSubject"]').show();
     }
 }
 
