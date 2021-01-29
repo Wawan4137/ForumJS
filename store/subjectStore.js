@@ -17,22 +17,22 @@ export async function getSubject(id){
     })
 }
 
-export async function addSubject(titre, dateCreation, categorie, auteur, contenu){
+export async function addSubject(nom, categorie, auteur, token){
     let url = "http://localhost:8000/api/sujets";
     const res = await fetch(url, {
         method: 'POST',
+        mode : "no-cors",
         headers: {
-            "accept": "application/ld+json",
-            "Content-Type": "application/ld+json",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer "+token,
+            "accept": "application/ld+json"
         },
         body: JSON.stringify({
-            "nom": titre,
-            "dateCreation": dateCreation,
-            "categorie": categorie,
-            "auteur": auteur,
-            "messages": [
-              contenu
-            ]
+            nom, auteur, categorie
           })
     })
+    .catch(err => {
+        console.log("Erreur", err)
+    })
+    console.log(res)
 }

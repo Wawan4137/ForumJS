@@ -39,7 +39,7 @@ function logout(){
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
 function reset(){
-    user.resetUserObject();
+    user = user.resetUserObject();
     if(user.isValid()){
         $('#modalConnexion').modal('hide')
         $('button[name="logout"]').show()
@@ -55,11 +55,9 @@ async function getCategoryWithId(id){
 }
 
 async function createSubject(){
-    
     let titre = $('input[name="subjectTitle"]')[0].value
-    let contenu = $('input[name="subjectContent"]').val();
-    console.log(titre+"-"+contenu);
-    subject = await subject.create(titre, "INFORMATIQUE", user.username, contenu);
+    let contenu = $('textarea[name="subjectContent"]').val();
+    subject = await subject.create(titre, "/api/categories/1", "/api/auteurs/1", user.token);    
 }
 
 $(document).ready(function(){

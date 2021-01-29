@@ -5,25 +5,13 @@ export default class Subject{
         this.nom = nom;
         this.categorie = categorie;
         this.auteur = auteur;
-        this.messages = messages;
-
-        
+        this.messages = messages;     
 
         this.dateCreation = dateCreation;
     }
 
-    create(nom, categorie, auteur, messages){
-        subjectStore.addSubject(nom, this.generateDate(), categorie, auteur, messages);
+    create(nom, categorie, auteur, token){
+        subjectStore.addSubject(nom, categorie, auteur, token);
         return this;
-    }
-
-    generateDate(){
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth()+1).padStart(2, '0');
-        let yyyy = today.getFullYear();
-
-        today = yyyy + '-' + mm + '-' + dd;
-        return today;
     }
 }

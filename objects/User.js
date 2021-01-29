@@ -4,6 +4,7 @@ export default class User{
     constructor(){
         this.username = null
         this.token = null
+        this.id = null
     }
 
     async connect(username,password){
