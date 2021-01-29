@@ -2,18 +2,22 @@ import * as userStore from '../store/userStore.js'
 
 export default class User{
     constructor(){
+        this.id = null
         this.username = null
         this.token = null
+<<<<<<< HEAD
         this.id = null
+=======
+        this.roles = null
+>>>>>>> main
     }
 
     async connect(username,password){
         let token = await userStore.login(username, password);
         if(token.token){
-            this.username = username
-            this.token = token.token
-            localStorage.setItem('username', this.username)
-            localStorage.setItem('token', this.token)
+            localStorage.setItem('username', username)
+            localStorage.setItem('token', token.token)
+            this.resetUserObject()
         }else{
             console.error(token)
         }
@@ -29,24 +33,41 @@ export default class User{
         }
 
     logout(){
+        this.id = null
         this.username = null
         this.token = null
+        this.roles = null
         localStorage.removeItem('username');
         localStorage.removeItem('token');
     }
 
-    resetUserObject(){
+    async resetUserObject(){
         let username = localStorage.getItem('username')
         let token = localStorage.getItem('token')
         if(username != null && token != null){
-            this.username= username
-            this.token = token
+            let users = await userStore.getUsers(token);
+            let found = false
+            users.forEach(user => {
+                if(user.username == username){
+                    this.id = user.id
+                    this.username = user.username
+                    this.roles = user.roles[1]
+                    this.token = token
+                    found = true;
+                }
+            });
+            if(!found){
+                this.id = null
+                this.username = null
+                this.token = null
+                this.roles = null
+            }
         }
         return this;
     }
 
     isValid(){
-        if(this.username != null && this.token != null){
+        if(this.id != null && this.token != null && this.roles != null && this.id != null){
             return true
         }
         return false

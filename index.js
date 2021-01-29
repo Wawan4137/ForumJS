@@ -30,7 +30,7 @@ function subscribe(){
 
 //Fonction de déconnexion (Header)
 function logout(){
-    user.logout()
+    user = user.logout()
     $('button[name="logout"]').hide()
     $('#welcomeMessage').html('')
     $('#welcomeMessage').hide()
@@ -39,8 +39,8 @@ function logout(){
 }
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
-function reset(){
-    user.resetUserObject();
+async function reset(){
+    user = await user.resetUserObject();
     if(user.isValid()){
         $('#modalConnexion').modal('hide')
         $('button[name="logout"]').show()

@@ -6,7 +6,6 @@ let user = new User()
 let category = new Category()
 let subject = new Subject();
 
-//Fonction de connexion (Header)
 async function connection(){
     let username = $('input[name="pseudoConnection"]')[0].value
     let password = $('input[name="mdpConnection"]')[0].value
@@ -30,7 +29,7 @@ function subscribe(){
 
 //Fonction de déconnexion (Header)
 function logout(){
-    user.logout()
+    user = user.logout()
     $('button[name="logout"]').hide()
     $('#welcomeMessage').html('')
     $('#welcomeMessage').hide()
@@ -38,8 +37,13 @@ function logout(){
 }
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
+<<<<<<< HEAD
 function reset(){
     user = user.resetUserObject();
+=======
+async function reset(){
+    user = await user.resetUserObject();
+>>>>>>> main
     if(user.isValid()){
         $('#modalConnexion').modal('hide')
         $('button[name="logout"]').show()
