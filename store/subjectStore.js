@@ -49,3 +49,17 @@ export async function addSubject(nom, categorie, auteur, token){
         console.log("Erreur", err)
     })
 }
+
+export async function deleteSubject(id, token){
+    let url = "http://localhost:8000/api/sujets/"+id;
+    const res = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            "accept": "*/*",
+            "Authorization":"Bearer "+token
+        }
+    })
+    .catch(err => {
+        console.log("Erreur lors de la suppression d'un sujet :", err)
+    })
+}

@@ -26,4 +26,9 @@ export default class Subject{
         return this;
     }
 
+    delete(id, token){
+        subjectStore.deleteSubject(id, token);
+        return this;
+    }
+
 }

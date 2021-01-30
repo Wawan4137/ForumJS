@@ -52,26 +52,33 @@ async function reset(){
     }
 }
 
+async function deleteSubject(id){
+    // await subject.delete(id, user.token);
+    // document.location.reload();
+    alert(id)
+}
+
 async function getCategoryWithId(id){
     category = await category.init(id)
-    //console.log(category);
-    //console.log(category.apiSubjects)
+    console.log(user.token);
+    console.log(user.roles);
     
     category.subjects.forEach(async (element) => {
-        //console.log(element)
         element = await element.updateRealAuteur(user.token);
         $.get("html_ressources/subject_item.html", function(data){
-            let item = $(data).attr('id', element.titre).attr('href', './category.html?id='+element.id)
-            //item = $(data).attr('href', './category.html?id='+element.id)
+            let item = $(data).attr('id', element.id)
+            //let item = $(data).attr('id', element.id).attr('href', './subject.html?id='+element.id)
             $("#categories").append(item)
-            $('#'+ element.titre)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
-            $('#'+ element.titre + ' button[name="btnDelete"]').hide()
-            if(element.auteur.id == user.id){
-                $('#'+ element.titre + ' button[name="btnDelete"]').show()
-            }
-            
-            //$('#'+ element.auteur)[0].childNodes[0].nodeValue = element.auteur
-            $('#'+ element.titre + ' span').text(element.messages.length)
+            $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+            $('#'+ element.id + ' button[name="btnDelete"]').hide()
+            if(element.auteur.id == user.id || user.roles == "ROLE_ADMIN"){
+                $('#'+ element.id + ' button[name="btnDelete"]').show()
+                // $('#'+ element.id + ' button[name="btnDelete"]').attr('OnClick', 'deleteSubject("'+element.id+'","'+user.token+'")')
+                $('#'+element.id+' button[name="logout"]').click(() => {
+                    deleteSubject(element.id)
+                })
+            }            
+            $('#'+ element.id + ' span').text(element.messages.length)
         })
     })    
     
