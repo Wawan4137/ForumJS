@@ -12,17 +12,13 @@ export default class Category{
 
     async init(id){
         let apiCategory = await categoryStore.getCategory(id);
-        console.log(apiCategory);
         this.id = apiCategory.id;
         this.nom = apiCategory.nom;
         this.apiSubjects = apiCategory.sujets;
-        console.log(this.apiSubjects);
         for (const apiSubj of this.apiSubjects){
             let val = await subjectStore.getSubjectWithURI(apiSubj);
-            console.log(val.nom);
             let Sub = new Subject(val.nom, val.auteur, val.dateCreation, val.categorie, val.id, val.messages);
             this.subjects.push(Sub)
-            console.log(this.subjects);
         }
         
         //console.log(this.subjects);

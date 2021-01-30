@@ -65,10 +65,15 @@ async function getCategoryWithId(id){
             //item = $(data).attr('href', './category.html?id='+element.id)
             $("#categories").append(item)
             $('#'+ element.titre)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+            $('#'+ element.titre + ' button[name="btnDelete"]').hide()
+            if(element.auteur.id == user.id){
+                $('#'+ element.titre + ' button[name="btnDelete"]').show()
+            }
+            
             //$('#'+ element.auteur)[0].childNodes[0].nodeValue = element.auteur
             $('#'+ element.titre + ' span').text(element.messages.length)
         })
-    })
+    })    
     
 
 }
@@ -101,8 +106,6 @@ $(document).ready(function(){
 
     $('#signInForm').hide();
     $('button[name="logout"]').hide()
-    $('button[name="addSubject"]').hide();
-
     //On actualise l'utilisateur
     reset()
     //On affiche les catégories
