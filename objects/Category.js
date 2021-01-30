@@ -16,11 +16,16 @@ export default class Category{
         this.id = apiCategory.id;
         this.nom = apiCategory.nom;
         this.apiSubjects = apiCategory.sujets;
-        this.apiSubjects.forEach(async (element) => {
-            let val = await subjectStore.getSubjectWithURI(element);
-            this.subjects.push(new Subject(val.nom, val.auteur, val.dateCreation, val.categorie, val.id, val.messages))
-        });
-        console.log(this.subjects);
+        console.log(this.apiSubjects);
+        for (const apiSubj of this.apiSubjects){
+            let val = await subjectStore.getSubjectWithURI(apiSubj);
+            console.log(val.nom);
+            let Sub = new Subject(val.nom, val.auteur, val.dateCreation, val.categorie, val.id, val.messages);
+            this.subjects.push(Sub)
+            console.log(this.subjects);
+        }
+        
+        //console.log(this.subjects);
         return this
     }
 }

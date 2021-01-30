@@ -54,8 +54,9 @@ async function reset(){
 
 async function getCategoryWithId(id){
     category = await category.init(id)
-    console.log(category);
-    console.log(category.apiSubjects)
+    //console.log(category);
+    //console.log(category.apiSubjects)
+    
     category.subjects.forEach(async (element) => {
         //console.log(element)
         element = await element.updateRealAuteur(user.token);
@@ -68,6 +69,7 @@ async function getCategoryWithId(id){
             $('#'+ element.titre + ' span').text(element.messages.length)
         })
     })
+    
 
 }
 
