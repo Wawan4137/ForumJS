@@ -6,11 +6,9 @@ export default class Message{
         this.date_creation = date_creation;
         this.sujet = sujet;
         this.auteur = auteur;
-    }
-
-    create(contenu, auteur, sujet){
-        messageStore.addMessage(nom, categorie, auteur);
+    }   
+    create(contenu, auteur, sujet, token){
+        messageStore.addMessage(nom, categorie, auteur, token);
         return this;
     }
-
 }
