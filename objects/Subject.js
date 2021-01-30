@@ -26,10 +26,4 @@ export default class Subject{
         return this;
     }
 
-    getLast(nPage){
-        let last = subjectStore.getLast(nPage);
-        console.log(last)
-        return last;
-    }
-
 }
