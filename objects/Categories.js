@@ -9,7 +9,7 @@ export default class Categories{
     //Récupère toutes les catégories
     async all(nPage){
         let categories = await categoryStore.getCategories(nPage);
-        console.log(categories);
+        //console.log(categories);
         categories.forEach(element => {
             this.categories.push(new Category(element.nom, element.sujets, element.id))
         });

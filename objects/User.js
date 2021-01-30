@@ -1,11 +1,11 @@
 import * as userStore from '../store/userStore.js'
 
 export default class User{
-    constructor(){
-        this.id = null
-        this.username = null
-        this.token = null
-        this.roles = null
+    constructor(id = null, username = null, token = null, roles = null){
+        this.id = id
+        this.username = username
+        this.token = token
+        this.roles = roles
     }
 
     async connect(username,password){

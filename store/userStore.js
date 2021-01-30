@@ -1,6 +1,6 @@
 //Requête de connexion => JWT Token
 export async function login(username, password){
-    let url = "http://localhost:8000/api/login_check";
+    let url = "https://localhost:8000/api/login_check";
     const res = await fetch(url, {
         method: 'POST',
         headers: {
@@ -15,7 +15,7 @@ export async function login(username, password){
 
 //Requête d'inscription User inscrit ou Erreur
 export async function createUser(username, password){
-    let url = "http://localhost:8000/api/auteurs";
+    let url = "https://localhost:8000/api/auteurs";
     const res = await fetch(url, {
         method: 'POST',
         headers: {
@@ -28,7 +28,7 @@ export async function createUser(username, password){
 }
 
 export async function getUsers(token){
-    let url = "http://localhost:8000/api/auteurs";
+    let url = "https://localhost:8000/api/auteurs";
     const res = await fetch(url, {
         method: 'GET',
         headers: {
@@ -39,3 +39,14 @@ export async function getUsers(token){
     return data['hydra:member']
 }
 
+export async function getUserURI(token, URI){
+    let url = "https://localhost:8000"+URI;
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer "+token
+        },
+    })
+    const data = await res.json();
+    return data
+}

@@ -1,5 +1,5 @@
 import User from './objects/User.js'
-import Category from './objects/Categories.js'
+import Category from './objects/Category.js'
 
 let user = new User()
 let category = new Category()
@@ -49,6 +49,21 @@ async function reset(){
 
 async function getCategoryWithId(id){
     category = await category.init(id)
+    console.log(category);
+    console.log(category.apiSubjects)
+    category.subjects.forEach(async (element) => {
+        //console.log(element)
+        element = await element.updateRealAuteur(user.token);
+        $.get("html_ressources/subject_item.html", function(data){
+            let item = $(data).attr('id', element.titre).attr('href', './category.html?id='+element.id)
+            //item = $(data).attr('href', './category.html?id='+element.id)
+            $("#categories").append(item)
+            $('#'+ element.titre)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+            //$('#'+ element.auteur)[0].childNodes[0].nodeValue = element.auteur
+            $('#'+ element.titre + ' span').text(element.messages.length)
+        })
+    })
+
 }
 
 $(document).ready(function(){

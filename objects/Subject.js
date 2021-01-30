@@ -1,18 +1,30 @@
-class Subject{
+import * as userStore from '../store/userStore.js'
+import User from './User.js'
 
-    constructor(titre, auteur, date_creation, categorie, id){
+export default class Subject{
+
+    constructor(titre = null, auteurURI = null, date_creation = null, categorie = null, id = null, messages = [], auteur = null){
         this.titre = titre;
-        this.auteur = auteur;
+        this.auteurURI = auteurURI;
         this.date_creation = date_creation;
         this.categorie = categorie;
         this.id = id;
-    }   
+        this.messages = messages;
+        this.auteur = auteur;
+    }
+
+    async updateRealAuteur(token){
+        let auteur = await userStore.getUserURI(token, this.auteurURI);
+        //console.log(auteur);
+        this.auteur = new User(auteur.id, auteur.username);
+        return this;
+    }
 
 }
 
 /*function getAllSubjects(nPage){
 
-    let url = "http://localhost:8000/api/sujets?page="+nPage;
+    let url = "https://localhost:8000/api/sujets?page="+nPage;
     let SubjectList = [];
     let i = 0;
     fetch(url)
