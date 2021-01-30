@@ -39,3 +39,14 @@ export async function getUsers(token){
     return data['hydra:member']
 }
 
+export async function getUserURI(token, URI){
+    let url = "http://localhost:8000"+URI;
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer "+token
+        },
+    })
+    const data = await res.json();
+    return data
+}

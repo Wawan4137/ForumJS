@@ -18,5 +18,5 @@ export async function getCategory(id){
         headers: {}
     })
     const data = await res.json();
-    return data['hydra:member']
+    return data
 }

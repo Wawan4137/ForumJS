@@ -1,15 +1,18 @@
 import * as messageStore from '../store/messageStore.js'
 
 export default class Message{
-    constructor(contenu = null, auteur = null, sujet = null, token = null){
+
+    constructor(id, contenu, date_creation, sujet, auteur){
+        this.id = id;
         this.contenu = contenu;
-        this.auteur = auteur;
+        this.date_creation = date_creation;
         this.sujet = sujet;
-        this.token = token;
-    }
+        this.auteur = auteur;
+    }   
 
     create(contenu, auteur, sujet, token){
         messageStore.addMessage(contenu, auteur, sujet, token);
         return this;
     }
+
 }
