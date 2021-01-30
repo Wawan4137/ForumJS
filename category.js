@@ -1,8 +1,12 @@
 import User from './objects/User.js'
 import Category from './objects/Category.js'
+import Subject from './objects/Subject.js'
+import Message from './objects/Message.js'
 
 let user = new User()
 let category = new Category()
+let subject = new Subject();
+let message = new Message();
 
 async function connection(){
     let username = $('input[name="pseudoConnection"]')[0].value
@@ -14,8 +18,7 @@ async function connection(){
         $('#welcomeMessage').html('Bienvenue, '+user.username)
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
-        
-
+        $('button[name="addSubject"]').show();     
     }
 }
 
@@ -33,6 +36,7 @@ function logout(){
     $('#welcomeMessage').html('')
     $('#welcomeMessage').hide()
     $('button[name="seconnecter"]').show()
+    $('button[name="addSubject"]').hide();
 }
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
@@ -44,6 +48,7 @@ async function reset(){
         $('#welcomeMessage').html('Bienvenue, '+user.username)
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
+        $('button[name="addSubject"]').show();
     }
 }
 
@@ -66,6 +71,28 @@ async function getCategoryWithId(id){
 
 }
 
+async function createSubject(){
+    let titre = $('input[name="subjectTitle"]')[0].value
+    let contenu = $('textarea[name="subjectContent"]').val();
+    subject = await subject.create(titre, "/api/categories/"+$_GET('id'), "/api/auteurs/"+user.id, user.token);
+    message = await message.create(contenu, "/api/auteurs/"+user.id, "", user.token)    
+}
+
+function $_GET(param) {
+	var vars = {};
+	window.location.href.replace( location.hash, '' ).replace( 
+		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+		function( m, key, value ) { // callback
+			vars[key] = value !== undefined ? value : '';
+		}
+	);
+
+	if ( param ) {
+		return vars[param] ? vars[param] : null;	
+	}
+	return vars;
+}
+
 $(document).ready(function(){
     let params = new URLSearchParams(location.search)
     let id_categorie = params.get('id')
@@ -74,6 +101,7 @@ $(document).ready(function(){
 
     $('#signInForm').hide();
     $('button[name="logout"]').hide()
+    $('button[name="addSubject"]').hide();
 
     //On actualise l'utilisateur
     reset()
@@ -89,6 +117,9 @@ $(document).ready(function(){
     })
     $('button[name="logout"]').click(() => {
         logout()
+    })
+    $('button[name="createSubject"]').click(() =>{
+        createSubject();
     })
 
     //Changement log form
