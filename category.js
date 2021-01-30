@@ -53,15 +53,11 @@ async function reset(){
 }
 
 async function deleteSubject(id){
-    // await subject.delete(id, user.token);
-    // document.location.reload();
-    alert(id)
+    await subject.delete(id, user.token);
 }
 
 async function getCategoryWithId(id){
     category = await category.init(id)
-    console.log(user.token);
-    console.log(user.roles);
     
     category.subjects.forEach(async (element) => {
         element = await element.updateRealAuteur(user.token);
@@ -73,7 +69,6 @@ async function getCategoryWithId(id){
             $('#'+ element.id + ' button[name="btnDelete"]').hide()
             if(element.auteur.id == user.id || user.roles == "ROLE_ADMIN"){
                 $('#'+ element.id + ' button[name="btnDelete"]').show()
-                // $('#'+ element.id + ' button[name="btnDelete"]').attr('OnClick', 'deleteSubject("'+element.id+'","'+user.token+'")')
                 $('#'+element.id+' button[name="btnDelete"]').click(() => {
                     deleteSubject(element.id)
                 })
