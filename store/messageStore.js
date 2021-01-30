@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export async function addMessage(dateCreation, auteur, contenu, sujet){
     let url = "http://localhost:8000/api/messages";
     const res = await fetch(url, {
@@ -18,7 +17,6 @@ export async function addMessage(dateCreation, auteur, contenu, sujet){
           })
     })
 }
-=======
 export async function getAllMessages(nPage){
     let url = "https://localhost:8000/api/messages?page="+nPage;
     const res = await fetch(url, {
@@ -31,10 +29,9 @@ export async function getAllMessages(nPage){
 }
 
 export async function getMessage(id){
-    let url = "https://localhost:8000/api/messages/"+id;
+    let url = "http://localhost:8000/api/messages/"+id;
     const res = await fetch(url, {
         method: 'GET',
         headers: {}
     })
 }
->>>>>>> main

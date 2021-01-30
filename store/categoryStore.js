@@ -1,5 +1,5 @@
 export async function getCategories(nPage){
-    let url = "https://localhost:8000/api/categories?page="+nPage;
+    let url = "http://localhost:8000/api/categories?page="+nPage;
     const res = await fetch(url, {
         method: 'GET',
         headers: {
@@ -12,7 +12,7 @@ export async function getCategories(nPage){
 }
 
 export async function getCategory(id){
-    let url = "https://localhost:8000/api/categories/"+id;
+    let url = "http://localhost:8000/api/categories/"+id;
     const res = await fetch(url, {
         method: 'GET',
         headers: {}
