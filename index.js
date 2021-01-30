@@ -17,8 +17,8 @@ async function connection(){
         $('#welcomeMessage').html('Bienvenue, '+user.username)
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
-        
-
+        $('button[name="addSubject"]').show();
+        Location.reload();
     }
 }
 
@@ -36,6 +36,7 @@ function logout(){
     $('#welcomeMessage').html('')
     $('#welcomeMessage').hide()
     $('button[name="seconnecter"]').show()
+    $('button[name="addSubject"]').hide();
 }
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
@@ -47,19 +48,16 @@ async function reset(){
         $('#welcomeMessage').html('Bienvenue, '+user.username)
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
-        console.log(user)
+        $('button[name="addSubject"]').show();
     }
 }
 
 //Récupération et Affichage des catégorie (Body)
 async function getCategories(){
     categories = await categories.all(1)
-    console.log(categories)
-    categories.categories.forEach(element => {
-        console.log(element)
+    categories.categories.forEach(element => {        
         $.get("html_ressources/category_item.html", function(data){
             let item = $(data).attr('id',element.nom).attr('href', './category.html?id='+element.id)
-            //item = $(data).attr('href', './category.html?id='+element.id)
             $("#categories").append(item)
             $('#'+ element.nom)[0].childNodes[0].nodeValue = element.nom
             $('#'+ element.nom + ' span').text(element.apiSubjects.length)
@@ -71,6 +69,7 @@ $(document).ready(function(){
 
     $('#signInForm').hide();
     $('button[name="logout"]').hide()
+    $('button[name="addSubject"]').hide()
 
     //On actualise l'utilisateur
     reset()

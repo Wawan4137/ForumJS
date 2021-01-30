@@ -7,26 +7,28 @@
         <meta charset="UTF-8">
         <title>Accueil</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ForumAPI</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" href="#">Accueil</a>
-                    <button name="logout" type="button" class="btn btn-outline-success">Se déconnecter</button>
-                    <p id="welcomeMessage" style="padding: .5em 1em; margin: 0"></p>
-                    <button name="seconnecter" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConnexion">
-                        Se connecter
-                    </button>
+            <nav class="navbar navbar-expand navbar-light bg-light justify-content-between">
+                <a class="navbar-brand" href="#">ForumAPI</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" href="#">Accueil</a>
+                        
+                        <p id="welcomeMessage" style="padding: .5em 1em; margin: 0"></p>
+                        <button name="logout" type="button" class="btn btn-outline-success">Se déconnecter</button>
+                        <button name="seconnecter" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConnexion">
+                            Se connecter
+                        </button>                        
+                    </div>
                 </div>
-            </div>
             </nav>
-            <!-- Modal -->
+            <!-- Modal Login -->
             <div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="modalConnexion" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -95,11 +97,11 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                     </div>
                 </div>
-            </div>              
+            </div>                         
         </header>
         <main>
         <div class="container mt-5">
