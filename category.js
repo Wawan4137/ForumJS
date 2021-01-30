@@ -118,7 +118,7 @@ $(document).ready(function(){
     })
     $('button[name="createSubject"]').click(() =>{
         createSubject();
-        document.reload();
+        window.location.reload();
     })
 
     //Changement log form
