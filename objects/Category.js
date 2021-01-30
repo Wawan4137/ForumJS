@@ -8,8 +8,8 @@ export default class Category{
         this.subjects = subjects
     }
 
-    init(id){
-        let apiCategory = categoryStore.getCategory(id)
+    async init(id){
+        let apiCategory = await categoryStore.getCategory(id)
         console.log(apiCategory)
     }
 }

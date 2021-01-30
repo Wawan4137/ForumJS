@@ -1,5 +1,5 @@
 export async function getAllSubjects(nPage){
-    let url = "http://localhost:8000/api/sujets?page="+nPage;
+    let url = "https://localhost:8000/api/sujets?page="+nPage;
     const res = await fetch(url, {
         method: 'GET',
         headers: {}
@@ -10,7 +10,7 @@ export async function getAllSubjects(nPage){
 }
 
 export async function getSubject(id){
-    let url = "http://localhost:8000/api/sujets/"+id;
+    let url = "https://localhost:8000/api/sujets/"+id;
     const res = await fetch(url, {
         method: 'GET',
         headers: {}

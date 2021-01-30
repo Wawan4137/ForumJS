@@ -1,5 +1,5 @@
 import User from './objects/User.js'
-import Category from './objects/Categories.js'
+import Category from './objects/Category.js'
 
 let user = new User()
 let category = new Category()
@@ -49,6 +49,8 @@ function reset(){
 }
 
 async function getCategoryWithId(id){
+    console.log(category);
+    console.log(id);
     category = await category.init(id)
 }
 

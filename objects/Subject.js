@@ -12,7 +12,7 @@ class Subject{
 
 /*function getAllSubjects(nPage){
 
-    let url = "http://localhost:8000/api/sujets?page="+nPage;
+    let url = "https://localhost:8000/api/sujets?page="+nPage;
     let SubjectList = [];
     let i = 0;
     fetch(url)
