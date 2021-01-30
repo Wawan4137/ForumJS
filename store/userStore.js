@@ -9,6 +9,7 @@ export async function login(username, password){
         body: JSON.stringify({username, password}),
     })
     const data = await res.json();
+
     return data
 }
 
@@ -25,3 +26,16 @@ export async function createUser(username, password){
     const data = await res.json();
     return data
 }
+
+export async function getUsers(token){
+    let url = "http://localhost:8000/api/auteurs";
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer "+token
+        },
+    })
+    const data = await res.json();
+    return data['hydra:member']
+}
+

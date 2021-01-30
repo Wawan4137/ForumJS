@@ -4,7 +4,6 @@ import Category from './objects/Category.js'
 let user = new User()
 let category = new Category()
 
-//Fonction de connexion (Header)
 async function connection(){
     let username = $('input[name="pseudoConnection"]')[0].value
     let password = $('input[name="mdpConnection"]')[0].value
@@ -29,7 +28,7 @@ function subscribe(){
 
 //Fonction de déconnexion (Header)
 function logout(){
-    user.logout()
+    user = user.logout()
     $('button[name="logout"]').hide()
     $('#welcomeMessage').html('')
     $('#welcomeMessage').hide()
@@ -37,8 +36,8 @@ function logout(){
 }
 
 //Récupétation et Affichage des info d'une personne déjà connecté (Header)
-function reset(){
-    user.resetUserObject();
+async function reset(){
+    user = await user.resetUserObject();
     if(user.isValid()){
         $('#modalConnexion').modal('hide')
         $('button[name="logout"]').show()
