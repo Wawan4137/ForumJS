@@ -54,6 +54,7 @@ async function reset(){
 
 async function deleteSubject(id){
     await subject.delete(id, user.token);
+    document.location.reload();
 }
 
 async function getCategoryWithId(id){
@@ -67,11 +68,13 @@ async function getCategoryWithId(id){
             $("#categories").append(item)
             $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
             $('#'+ element.id + ' button[name="btnDelete"]').hide()
-            if(element.auteur.id == user.id || user.roles == "ROLE_ADMIN"){
+            $('#'+ element.id + ' button[name="btnEdit"]').hide()
+            if(user.roles == "ROLE_ADMIN"){
                 $('#'+ element.id + ' button[name="btnDelete"]').show()
+                $('#'+ element.id + ' button[name="btnEdit"]').show()
                 $('#'+element.id+' button[name="btnDelete"]').click(() => {
                     deleteSubject(element.id)
-                })
+                }
             }            
             $('#'+ element.id + ' span').text(element.messages.length)
         })

@@ -40,9 +40,7 @@ export async function addSubject(nom, categorie, auteur, token){
             "accept": "application/ld+json"
         },
         body: JSON.stringify({
-            "nom":nom,
-            "categorie":categorie,
-            "auteur":auteur
+            nom, categorie, auteur
           })
     })
     .catch(err => {
