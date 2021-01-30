@@ -9,7 +9,7 @@ export default class Message{
     }
 
     create(contenu, auteur, sujet, token){
-        messageStore.addMessage(nom, categorie, auteur, token);
+        messageStore.addMessage(contenu, auteur, sujet, token);
         return this;
     }
 }

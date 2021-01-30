@@ -14,4 +14,11 @@ export default class Subject{
         subjectStore.addSubject(nom, categorie, auteur, token);
         return this;
     }
+
+    getLast(nPage){
+        let last = subjectStore.getLast(nPage);
+        console.log(last)
+        return last;
+    }
+
 }

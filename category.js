@@ -59,8 +59,10 @@ async function getCategoryWithId(id){
 async function createSubject(){
     let titre = $('input[name="subjectTitle"]')[0].value
     let contenu = $('textarea[name="subjectContent"]').val();
-    subject = await subject.create(titre, "/api/categories/"+$_GET('id'), "/api/auteurs/"+user.id, user.token);
-    message = await message.create(contenu, "/api/auteurs/"+user.id, "", user.token)    
+    //subject = await subject.create(titre, "/api/categories/"+$_GET('id'), "/api/auteurs/"+user.id, user.token);
+
+    console.log(await subject.getLast(1));
+    //message = await message.create(contenu, "/api/auteurs/"+user.id, lastSubject, user.token)    
 }
 
 function $_GET(param) {
