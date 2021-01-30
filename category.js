@@ -74,7 +74,7 @@ async function getCategoryWithId(id){
             if(element.auteur.id == user.id || user.roles == "ROLE_ADMIN"){
                 $('#'+ element.id + ' button[name="btnDelete"]').show()
                 // $('#'+ element.id + ' button[name="btnDelete"]').attr('OnClick', 'deleteSubject("'+element.id+'","'+user.token+'")')
-                $('#'+element.id+' button[name="logout"]').click(() => {
+                $('#'+element.id+' button[name="btnDelete"]').click(() => {
                     deleteSubject(element.id)
                 })
             }            
