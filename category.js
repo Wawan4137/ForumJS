@@ -104,7 +104,7 @@ async function getCategoryWithId(id){
                 })
             }      
             $('#'+ element.id + ' a[name="btnLink"]').attr('href', './subject.html?id='+element.id)    ;  
-            $('#'+ element.id + ' span').text(element.messages.length);
+            $('#'+ element.id + ' span[name="msgNumber"]').text(element.messages.length);
         })
     })    
     
@@ -139,6 +139,8 @@ $(document).ready(function(){
 
     $('#signInForm').hide();
     $('button[name="logout"]').hide()
+    $('span[name="btnAddLoading"]').hide()
+    $('span[name="btnAddLoadingText"]').hide()
     //On actualise l'utilisateur
     reset()
     //On affiche les catégories
@@ -155,8 +157,11 @@ $(document).ready(function(){
         logout()
     })
     $('button[name="createSubject"]').click(() =>{
+        $('button[name="createSubject"]').prop( "disabled", true );
+        $('span[name="btnAddText"]').hide();
+        $('span[name="btnAddLoading"]').show();
+        $('span[name="btnAddLoadingText"]').show();
         createSubject();
-        window.location.reload();
     })
 
     //Changement log form
