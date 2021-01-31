@@ -68,8 +68,7 @@ async function getCategoryWithId(id){
     category.subjects.forEach(async (element) => {
         element = await element.updateRealAuteur(user.token);
         $.get("html_ressources/subject_item.html", function(data){
-            //let item = $(data).attr('id', element.id)
-            let item = $(data).attr('id', element.id).attr('href', './subject.html?id='+element.id)
+            let item = $(data).attr('id', element.id)
             $("#categories").append(item)
             $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
             $('#'+ element.id + ' div[name="editInputGroup"]').hide()
@@ -95,7 +94,8 @@ async function getCategoryWithId(id){
                 $('#' + element.id + ' button[name="editButtonValid"]').click(() => {
                     editSubject(element.id, $('#'+ element.id + ' input[name="editInput"]').val(), element.auteur.id)
                 })
-            }            
+            }      
+            $('#'+ element.id + ' a[name="btnLink"]').attr('href', './subject.html?id='+element.id)      
             $('#'+ element.id + ' span').text(element.messages.length)
         })
     })    
