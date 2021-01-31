@@ -1,17 +1,39 @@
 import * as subjectStore from '../store/subjectStore.js'
+import * as messageStore from '../store/messageStore.js'
 import * as userStore from '../store/userStore.js'
 import User from './User.js'
+import Message from './Message.js'
 
 export default class Subject{
 
-    constructor(titre = null, auteurURI = null, date_creation = null, categorie = null, id = null, messages = [], auteur = null){
+    constructor(titre = null, auteurURI = null, date_creation = null, categorie = null, id = null, messagesURI = [], messages = [], auteur = null){
         this.titre = titre;
         this.auteurURI = auteurURI;
         this.date_creation = date_creation;
         this.categorie = categorie;
         this.id = id;
         this.messages = messages;
+        this.messagesURI = messagesURI;
         this.auteur = auteur;
+    }
+
+    async init(id){
+        let apiSubject = await subjectStore.getSubject(id);
+        //console.log(apiSubject)
+        this.id = apiSubject.id;
+        this.titre = apiSubject.nom;
+        this.auteurURI = apiSubject.auteur;
+        this.date_creation = apiSubject.dateCreation
+        this.categorie = apiSubject.categorie;
+        this.messagesURI = apiSubject.messages
+        for (const messageURI of this.messagesURI){
+            let val = await messageStore.getMessageWithURI(messageURI);
+            console.log(val)
+            let message = new Message(val.id, val.contenu, val.dateCreation,val.sujet, val.auteur)
+            this.messages.push(message)
+        }
+
+        return this;
     }
 
     async updateRealAuteur(token){
