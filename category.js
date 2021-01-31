@@ -71,32 +71,40 @@ async function getCategoryWithId(id){
             let item = $(data).attr('id', element.id)
             $("#categories").append(item)
             $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
-            $('#'+ element.id + ' div[name="editInputGroup"]').hide()
-            $('#'+ element.id + ' button[name="btnDelete"]').hide()
-            $('#'+ element.id + ' button[name="btnEdit"]').hide()
+            $('#'+ element.id + ' div[name="editInputGroup"]').hide();
+            $('#'+ element.id + ' button[name="btnDelete"]').hide();
+            $('#'+ element.id + ' button[name="btnEdit"]').hide();
+            $('#'+ element.id + ' span[name="btnEditValidLoading"]').hide();
+            $('#'+ element.id + ' span[name="btnDeleteLoading"]').hide();
             if(user.roles == "ROLE_ADMIN"){
-                $('#' + element.id + ' button[name="btnDelete"]').show()
-                $('#' + element.id + ' button[name="btnEdit"]').show()
+                $('#' + element.id + ' button[name="btnDelete"]').show();
+                $('#' + element.id + ' button[name="btnEdit"]').show();
                 $('#' + element.id + ' button[name="btnDelete"]').click(() => {
+                    $('#' + element.id + ' button[name="btnDelete"]').prop( "disabled", true );
+                    $('#' + element.id + ' i[name="btnDeleteIcon"]').hide();
+                    $('#'+ element.id + ' span[name="btnDeleteLoading"]').show();
                     deleteSubject(element.id)
                 })
                 $('#' + element.id + ' button[name="btnEdit"]').click(() => {
                     if($('#'+ element.id)[0].childNodes[0].nodeValue == ""){
-                        $('#'+ element.id + ' div[name="editInputGroup"]').hide()
+                        $('#'+ element.id + ' div[name="editInputGroup"]').hide();
                         $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
                     }else{
                         $('#'+ element.id)[0].childNodes[0].nodeValue = "";
-                        $('#'+ element.id + ' div[name="editInputGroup"]').show()
-                        $('#'+ element.id + ' span[name="editAuteurInfo"]').text("par " + element.auteur.username)
-                        $('#'+ element.id + ' input[name="editInput"]').val(element.titre)
+                        $('#'+ element.id + ' div[name="editInputGroup"]').show();
+                        $('#'+ element.id + ' span[name="editAuteurInfo"]').text("par " + element.auteur.username);
+                        $('#'+ element.id + ' input[name="editInput"]').val(element.titre);
                     }
                 })
                 $('#' + element.id + ' button[name="editButtonValid"]').click(() => {
-                    editSubject(element.id, $('#'+ element.id + ' input[name="editInput"]').val(), element.auteur.id)
+                    editSubject(element.id, $('#'+ element.id + ' input[name="editInput"]').val(), element.auteur.id);
+                    $('#' + element.id + ' button[name="editButtonValid"]').prop( "disabled", true );
+                    $('#'+ element.id + ' i[name="btnEditValidIcon"]').hide();
+                    $('#'+ element.id + ' span[name="btnEditValidLoading"]').show();
                 })
             }      
-            $('#'+ element.id + ' a[name="btnLink"]').attr('href', './subject.html?id='+element.id)      
-            $('#'+ element.id + ' span').text(element.messages.length)
+            $('#'+ element.id + ' a[name="btnLink"]').attr('href', './subject.html?id='+element.id)    ;  
+            $('#'+ element.id + ' span').text(element.messages.length);
         })
     })    
     
