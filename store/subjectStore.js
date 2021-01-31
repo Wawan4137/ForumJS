@@ -46,6 +46,11 @@ export async function addSubject(nom, categorie, auteur, token){
     .catch(err => {
         console.log("Erreur", err)
     })
+    .then(
+        setTimeout(function UpdateScreen() {
+            document.location.reload()
+        }, 2000)
+    )
 }
 
 export async function deleteSubject(id, token){
@@ -60,6 +65,11 @@ export async function deleteSubject(id, token){
     .catch(err => {
         console.log("Erreur lors de la suppression d'un sujet :", err)
     })
+    .then(
+        setTimeout(function UpdateScreen() {
+            document.location.reload()
+        }, 500)
+    )
 }
 
 export async function editSubject(id, nom, categorie, auteur, token){
@@ -78,4 +88,9 @@ export async function editSubject(id, nom, categorie, auteur, token){
     .catch(err => {
         console.log("Erreur", err)
     })
+    .then(
+        setTimeout(function UpdateScreen() {
+            document.location.reload()
+        }, 500)
+    )
 }
