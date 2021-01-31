@@ -61,3 +61,21 @@ export async function deleteSubject(id, token){
         console.log("Erreur lors de la suppression d'un sujet :", err)
     })
 }
+
+export async function editSubject(id, nom, categorie, auteur, token){
+    let url = "http://localhost:8000/api/sujets/"+id;
+    const res = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/merge-patch+json",
+            "Authorization": "Bearer "+token,
+            "accept": "application/ld+json"
+        },
+        body: JSON.stringify({
+            nom, categorie, auteur
+          })
+    })
+    .catch(err => {
+        console.log("Erreur", err)
+    })
+}

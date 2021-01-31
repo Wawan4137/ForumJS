@@ -18,7 +18,6 @@ async function connection(){
         $('#welcomeMessage').show()
         $('button[name="seconnecter"]').hide()
         $('button[name="addSubject"]').show();
-        Location.reload();
     }
 }
 

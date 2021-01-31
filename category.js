@@ -54,7 +54,10 @@ async function reset(){
 
 async function deleteSubject(id){
     await subject.delete(id, user.token);
-    document.location.reload();
+}
+
+async function editSubject(id, nom, auteur){
+    await subject.edit(id, nom, "/api/categories/"+$_GET('id'), "/api/auteurs/"+auteur, user.token);
 }
 
 async function getCategoryWithId(id){
@@ -67,14 +70,29 @@ async function getCategoryWithId(id){
             //let item = $(data).attr('id', element.id).attr('href', './subject.html?id='+element.id)
             $("#categories").append(item)
             $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+            $('#'+ element.id + ' div[name="editInputGroup"]').hide()
             $('#'+ element.id + ' button[name="btnDelete"]').hide()
             $('#'+ element.id + ' button[name="btnEdit"]').hide()
             if(user.roles == "ROLE_ADMIN"){
-                $('#'+ element.id + ' button[name="btnDelete"]').show()
-                $('#'+ element.id + ' button[name="btnEdit"]').show()
-                $('#'+element.id+' button[name="btnDelete"]').click(() => {
+                $('#' + element.id + ' button[name="btnDelete"]').show()
+                $('#' + element.id + ' button[name="btnEdit"]').show()
+                $('#' + element.id + ' button[name="btnDelete"]').click(() => {
                     deleteSubject(element.id)
-                }
+                })
+                $('#' + element.id + ' button[name="btnEdit"]').click(() => {
+                    if($('#'+ element.id)[0].childNodes[0].nodeValue == ""){
+                        $('#'+ element.id + ' div[name="editInputGroup"]').hide()
+                        $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+                    }else{
+                        $('#'+ element.id)[0].childNodes[0].nodeValue = "";
+                        $('#'+ element.id + ' div[name="editInputGroup"]').show()
+                        $('#'+ element.id + ' span[name="editAuteurInfo"]').text("par " + element.auteur.username)
+                        $('#'+ element.id + ' input[name="editInput"]').val( element.titre)
+                    }
+                })
+                $('#' + element.id + ' button[name="editButtonValid"]').click(() => {
+                    editSubject(element.id, $('#'+ element.id + ' input[name="editInput"]').val(), element.auteur.id)
+                })
             }            
             $('#'+ element.id + ' span').text(element.messages.length)
         })

@@ -31,4 +31,9 @@ export default class Subject{
         return this;
     }
 
+    edit(id, nom, categorie, auteur, token){
+        subjectStore.editSubject(id, nom, categorie, auteur, token);
+        return this;
+    }
+
 }
