@@ -64,6 +64,11 @@ export async function deleteSubject(id, token){
 
 export async function editSubject(id, nom, categorie, auteur, token){
     let url = "http://localhost:8000/api/sujets/"+id;
+    console.log(id)
+    console.log(nom)
+    console.log(categorie)
+    console.log(auteur)
+    console.log(token)
     const res = await fetch(url, {
         method: 'PATCH',
         headers: {

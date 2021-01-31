@@ -57,7 +57,9 @@ async function deleteSubject(id){
 }
 
 async function editSubject(id, nom, auteur){
-    await subject.edit(id, nom, "/api/categories/"+$_GET('id'), "/api/auteurs/"+auteur, user.token);
+    let params = new URLSearchParams(location.search)
+    let id_categorie = params.get('id')
+    await subject.edit(id, nom, "/api/categories/"+id_categorie, "/api/auteurs/"+auteur, user.token);
 }
 
 async function getCategoryWithId(id){
