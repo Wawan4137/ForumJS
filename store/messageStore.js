@@ -35,3 +35,13 @@ export async function getMessage(id){
         headers: {}
     })
 }
+
+export async function getMessageWithURI(URI){
+    let url = "http://localhost:8000"+URI;
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: {}
+    })
+    const data = await res.json();
+    return data;
+}

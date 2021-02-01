@@ -3,10 +3,11 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-        <script type="module" src="category.js"></script>
+        <script type="module" src="subject.js"></script>
         <meta charset="UTF-8">
         <title>Accueil</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     </head>
     <body>
         <header>
@@ -17,7 +18,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" href="#">Accueil</a>
+                    <a class="nav-link active" href="index.html">Accueil</a>
                     <button name="logout" type="button" class="btn btn-outline-success">Se déconnecter</button>
                     <p id="welcomeMessage" style="padding: .5em 1em; margin: 0"></p>
                     <button name="seconnecter" type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConnexion">
@@ -26,7 +27,7 @@
                 </div>
             </div>
             </nav>
-            <!-- Modal -->
+            <!-- Modal Log in -->
             <div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="modalConnexion" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -40,7 +41,7 @@
                         <form id="connectForm">
                             <div class="row">
                                 <div class="col-6 text-left">
-                                    Nom d'utilsateur
+                                    Nom d'utilisateur
                                 </div>
                                 <div class="col-6 text-right">
                                     <input type="text" name="pseudoConnection" required/>
@@ -99,7 +100,7 @@
                     </div>
                     </div>
                 </div>
-            </div>              
+            </div>             
         </header>
         <main>
         <div class="container mt-5">
@@ -111,10 +112,11 @@
                 <div class="col-md-2"></div>
             </div>
             <hr class="divider"></hr>
-            <ul class="list-group" id="categories">
+            <div class="row">
+            </div>
+            <div id="messages">
 
-            </ul>
-        </div>
+            </div>
         </main>
     </body>
 </html>

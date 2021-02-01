@@ -1,6 +1,26 @@
-<a href="#" class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between">
+<div class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between">
     Titres Sujets Auteurs
-    <div>
-        <span class="badge bg-dark rounded-pill">0</span>
+    <div class="input-group" name="editInputGroup" style="width: 50%;">
+        <input type="text" class="form-control" aria-describedby="basic-addon2" name="editInput">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2" name="editAuteurInfo">- par X</span>
+        </div>
+        <button class="btn btn-success" name="editButtonValid">
+            <i class="fas fa-check" name="btnEditValidIcon"></i>           
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" name="btnEditValidLoading"></span>
+        </button>
     </div>
-</a>
+    <div>
+        <span class="badge bg-dark rounded-pill" name="msgNumber">0</span>
+        <button class="btn btn-warning" name="btnEdit" type="button">
+            <i class="far fa-edit" name="btnEditIcon"></i> 
+        </button>
+        <button class="btn btn-danger" name="btnDelete" type="button">
+            <i class="fas fa-trash-alt" name="btnDeleteIcon"></i>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" name="btnDeleteLoading"></span>
+        </button>
+        <a href="#" class="btn btn-secondary" role="button" aria-pressed="true" name="btnLink">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</div>

@@ -52,23 +52,61 @@ async function reset(){
     }
 }
 
+async function deleteSubject(id){
+    await subject.delete(id, user.token);
+}
+
+async function editSubject(id, nom, auteur){
+    let params = new URLSearchParams(location.search)
+    let id_categorie = params.get('id')
+    await subject.edit(id, nom, "/api/categories/"+id_categorie, "/api/auteurs/"+auteur, user.token);
+}
+
 async function getCategoryWithId(id){
     category = await category.init(id)
-    //console.log(category);
-    //console.log(category.apiSubjects)
     
     category.subjects.forEach(async (element) => {
-        //console.log(element)
         element = await element.updateRealAuteur(user.token);
         $.get("html_ressources/subject_item.html", function(data){
-            let item = $(data).attr('id', element.titre).attr('href', './category.html?id='+element.id)
-            //item = $(data).attr('href', './category.html?id='+element.id)
+            let item = $(data).attr('id', element.id)
             $("#categories").append(item)
-            $('#'+ element.titre)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
-            //$('#'+ element.auteur)[0].childNodes[0].nodeValue = element.auteur
-            $('#'+ element.titre + ' span').text(element.messages.length)
+            $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+            $('#'+ element.id + ' div[name="editInputGroup"]').hide();
+            $('#'+ element.id + ' button[name="btnDelete"]').hide();
+            $('#'+ element.id + ' button[name="btnEdit"]').hide();
+            $('#'+ element.id + ' span[name="btnEditValidLoading"]').hide();
+            $('#'+ element.id + ' span[name="btnDeleteLoading"]').hide();
+            if(user.roles == "ROLE_ADMIN"){
+                $('#' + element.id + ' button[name="btnDelete"]').show();
+                $('#' + element.id + ' button[name="btnEdit"]').show();
+                $('#' + element.id + ' button[name="btnDelete"]').click(() => {
+                    $('#' + element.id + ' button[name="btnDelete"]').prop( "disabled", true );
+                    $('#' + element.id + ' i[name="btnDeleteIcon"]').hide();
+                    $('#'+ element.id + ' span[name="btnDeleteLoading"]').show();
+                    deleteSubject(element.id)
+                })
+                $('#' + element.id + ' button[name="btnEdit"]').click(() => {
+                    if($('#'+ element.id)[0].childNodes[0].nodeValue == ""){
+                        $('#'+ element.id + ' div[name="editInputGroup"]').hide();
+                        $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+                    }else{
+                        $('#'+ element.id)[0].childNodes[0].nodeValue = "";
+                        $('#'+ element.id + ' div[name="editInputGroup"]').show();
+                        $('#'+ element.id + ' span[name="editAuteurInfo"]').text("par " + element.auteur.username);
+                        $('#'+ element.id + ' input[name="editInput"]').val(element.titre);
+                    }
+                })
+                $('#' + element.id + ' button[name="editButtonValid"]').click(() => {
+                    editSubject(element.id, $('#'+ element.id + ' input[name="editInput"]').val(), element.auteur.id);
+                    $('#' + element.id + ' button[name="editButtonValid"]').prop( "disabled", true );
+                    $('#'+ element.id + ' i[name="btnEditValidIcon"]').hide();
+                    $('#'+ element.id + ' span[name="btnEditValidLoading"]').show();
+                })
+            }      
+            $('#'+ element.id + ' a[name="btnLink"]').attr('href', './subject.html?id='+element.id)    ;  
+            $('#'+ element.id + ' span[name="msgNumber"]').text(element.messages.length);
         })
-    })
+    })    
     
 
 }
@@ -101,8 +139,8 @@ $(document).ready(function(){
 
     $('#signInForm').hide();
     $('button[name="logout"]').hide()
-    $('button[name="addSubject"]').hide();
-
+    $('span[name="btnAddLoading"]').hide()
+    $('span[name="btnAddLoadingText"]').hide()
     //On actualise l'utilisateur
     reset()
     //On affiche les catégories
@@ -119,8 +157,11 @@ $(document).ready(function(){
         logout()
     })
     $('button[name="createSubject"]').click(() =>{
+        $('button[name="createSubject"]').prop( "disabled", true );
+        $('span[name="btnAddText"]').hide();
+        $('span[name="btnAddLoading"]').show();
+        $('span[name="btnAddLoadingText"]').show();
         createSubject();
-        window.location.reload();
     })
 
     //Changement log form
