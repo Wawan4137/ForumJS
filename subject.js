@@ -1,9 +1,13 @@
 import User from './objects/User.js'
 import Subject from './objects/Subject.js'
 import Message from './objects/Message.js'
+import { addMessage } from './store/messageStore.js';
+import { getUsers } from './store/userStore.js';
+import { getCategory } from './store/categoryStore.js';
 
 let user = new User()
 let subject = new Subject();
+let message = new Message();
 
 async function connection(){
     let username = $('input[name="pseudoConnection"]')[0].value
@@ -18,6 +22,27 @@ async function connection(){
         $('button[name="addSubject"]').show();     
     }
 }
+
+async function deleteSubject(id){
+    await message.delete(id, user.token);
+}
+
+async function editSubject(id, nom, auteur){
+    await message.edit(id,nom, auteur.username);
+}
+
+async function ajouterMessage(){
+    let contenu = $('textarea[name="ajoutMessage"]')[0].value
+    let auteurId = user.id;
+    let sujetId = subject.id;
+    console.log(contenu);
+    console.log(auteurId);
+    console.log(sujetId);
+    console.log(user.token);
+    await message.createMessage(contenu, auteurId, sujetId, user.token);
+    
+}
+
 
 //Fonction d'inscription (Header)
 function subscribe(){
@@ -72,9 +97,47 @@ async function getSubjectWithId(id){
             let item = $(data).attr('id', element.id)
             $('#messages').append(item)
             $('#'+element.id+' .card-body .card-title').text("Par " + element.auteur.username + ' le ' + dateToLocalDate(new Date(element.date_creation)))  
-            $('#'+element.id+' .card-body .card-text').text(element.contenu)  
+            $('#'+element.id+' .card-body .card-text').text(element.contenu)
+            $('#'+ element.id + ' div[name="editInputGroup"]').hide();
+            $('#'+ element.id + ' button[name="btnDelete"]').hide();
+            $('#'+ element.id + ' button[name="btnEdit"]').hide();
+            $('#'+ element.id + ' span[name="btnEditValidLoading"]').hide();
+            $('#'+ element.id + ' span[name="btnDeleteLoading"]').hide();
+            console.log('non');
+            if(user.roles == "ROLE_ADMIN"){
+                console.log("oui");
+                $('#' + element.id + ' button[name="btnDelete"]').show();
+                $('#' + element.id + ' button[name="btnEdit"]').show();
+                $('#' + element.id + ' button[name="btnDelete"]').click(() => {
+                    $('#' + element.id + ' button[name="btnDelete"]').prop( "disabled", true );
+                    $('#' + element.id + ' i[name="btnDeleteIcon"]').hide();
+                    $('#'+ element.id + ' span[name="btnDeleteLoading"]').show();
+                    deleteSubject(element.id)
+                }
+                )
+                $('#' + element.id + ' button[name="btnEdit"]').click(() => {
+                    if($('#'+ element.id)[0].childNodes[0].nodeValue == ""){
+                        $('#'+ element.id + ' div[name="editInputGroup"]').hide();
+                        $('#'+ element.id)[0].childNodes[0].nodeValue = element.titre + ' - par ' + element.auteur.username;
+                    }else{
+                        $('#'+ element.id)[0].childNodes[0].nodeValue = "";
+                        $('#'+ element.id + ' div[name="editInputGroup"]').show();
+                        $('#'+ element.id + ' span[name="editAuteurInfo"]').text("par " + element.auteur.username);
+                        $('#'+ element.id + ' input[name="editInput"]').val(element.titre);
+                    }
+                })
+                $('#' + element.id + ' button[name="editButtonValid"]').click(() => {
+                    editSubject(element.id, $('#'+ element.id + ' input[name="editInput"]').val(), element.auteur.id);
+                    $('#' + element.id + ' button[name="editButtonValid"]').prop( "disabled", true );
+                    $('#'+ element.id + ' i[name="btnEditValidIcon"]').hide();
+                    $('#'+ element.id + ' span[name="btnEditValidLoading"]').show();
+                })
+            }      
+            //$('#'+ element.id + ' a[name="btnLink"]').attr('href', './subject.html?id='+element.id)    ;  
+            //$('#'+ element.id + ' span[name="msgNumber"]').text(element.messages.length);
         })
     })
+    
 }
 
 $(document).ready(function(){
@@ -99,6 +162,9 @@ $(document).ready(function(){
     })
     $('button[name="logout"]').click(() => {
         logout()
+    })
+    $('button[name="ajouterMessage"]').click(() => {
+        ajouterMessage()
     })
 
     //Changement log form

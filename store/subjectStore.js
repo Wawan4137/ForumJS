@@ -94,3 +94,4 @@ export async function editSubject(id, nom, categorie, auteur, token){
         }, 500)
     )
 }
+
