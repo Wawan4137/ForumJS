@@ -21,8 +21,18 @@ export default class Message{
         return this;
     }
 
-    create(contenu, auteur, sujet, token){
+    createMessage(contenu, auteur, sujet, token){
         messageStore.addMessage(contenu, auteur, sujet, token);
+        return this;
+    }
+
+    delete(id, token){
+        messageStore.deleteMessage(id, token);
+        return this;
+    }
+
+    edit(id, contenu, auteur, token){
+        messageStore.editMessage(id, contenu, auteur, token);
         return this;
     }
 
