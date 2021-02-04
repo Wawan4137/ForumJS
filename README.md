@@ -1,7 +1,8 @@
 # ForumJS
 
-## Créer une catégorie
+ForumJS is a classic forum with account management.
 
-`curl -X POST "http://localhost:8000/api/categories" -H  "accept: application/ld+json" -H  "Content-Type: application/ld+json" -H "Authorization: Bearer [JWT]" -d "{\"nom\":\"[NOM]\"}"`
+A front site with HTML/CSS/VanillaJS, working with dedicated API 
 
-## Créer un sujet
+Link API : https://github.com/mutergfp/ForumAPI
+
