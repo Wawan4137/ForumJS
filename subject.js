@@ -31,15 +31,15 @@ async function editSubject(id, nom, auteur){
     await message.edit(id,nom, auteur.username);
 }
 
-async function ajouterMessage (){
-    let contenu = $('textarea[name="ajouterMessage"]').val()
-    let auteur = user;
-    let sujet = subject;
+async function ajouterMessage(){
+    let contenu = $('textarea[name="ajoutMessage"]')[0].value
+    let auteurId = user.id;
+    let sujetId = subject.id;
     console.log(contenu);
-    console.log(auteur);
-    console.log(sujet);
+    console.log(auteurId);
+    console.log(sujetId);
     console.log(user.token);
-    await message.createMessage(contenu, auteur, sujet, user.token);
+    await message.createMessage(contenu, auteurId, sujetId, user.token);
     
 }
 

@@ -21,8 +21,13 @@ export default class Message{
         return this;
     }
 
-    createMessage(contenu, auteur, sujet, token){
-        messageStore.addMessage(contenu, auteur, sujet, token);
+    createMessage(contenu, auteurId, sujetId, token){
+        let auteurURI = "/api/auteurs/"+auteurId
+        let sujetURI = "/api/sujets/"+ sujetId
+        console.log(contenu)
+        console.log(auteurURI)
+        console.log(sujetURI)
+        messageStore.addMessage(sujetURI, auteurURI, contenu, token);
         return this;
     }
 
@@ -31,8 +36,11 @@ export default class Message{
         return this;
     }
 
-    edit(id, contenu, auteur, token){
-        messageStore.editMessage(id, contenu, auteur, token);
+    edit(contenu, auteurId, sujetId, token){
+        let auteurURI = "/api/auteurs/"+auteurId
+        let sujetURI = "/api/sujets/"+ sujetId
+
+        messageStore.editMessage(sujetURI, auteurURI, contenu, token);
         return this;
     }
 

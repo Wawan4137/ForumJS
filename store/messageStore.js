@@ -1,4 +1,4 @@
-export async function addMessage(sujet, auteur,message, token){
+export async function addMessage(sujet, auteur, contenu, token){
     let url = "http://localhost:8000/api/messages";
     const res = await fetch(url, {
         method: 'POST',
@@ -8,7 +8,7 @@ export async function addMessage(sujet, auteur,message, token){
             "accept": "application/ld+json"
         },
         body: JSON.stringify({
-            sujet, auteur, message
+            sujet, auteur, contenu
           })
     })
     .catch(err => {
